@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">CityGuideApp</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_search">Search</string>
+    <string name="title_lists">Lists</string>
+    <string name="title_account">Account</string>
+    <string name="main_museums">Museums</string>
+    <string name="main_parks">Parks</string>
+    <string name="main_places">Places</string>
+    <string name="main_malls">Malls</string>
+
+
+    <!-- Strings related to login -->
+    <string name="title_activity_login">Log in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in"><b>Sign in</b></string>
+    <string name="action_register">Create Account</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="loading">Loading</string>
+    <string name="register_account"><u>Don\'t have an account?</u></string>
+
+
+    <!-- Strings related to register -->
+    <string name="title_activity_register">Create Account</string>
+    <string name="title_register">Create Account</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_repeat_password">Repeat password</string>
+    <string name="create_account_button">Create</string>
+    <string name="error_invalid_name">Invalid FirstName</string>
+
+
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+
+    <string name="internet_down">Internet connection down</string>
+
+    <string name="place_opened">Open now</string>
+    <string name="place_closed">Closed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

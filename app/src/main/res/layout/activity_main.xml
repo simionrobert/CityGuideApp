@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorButtonNormal"
+    tools:context="com.example.cityguideapp.views.MainActivity">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+    <SearchView
+        android:id="@+id/mainSearchView"
+        android:layout_width="345dp"
+        android:layout_height="68dp"
+        android:background="@android:color/background_light"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:stretchColumns="0,1"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainSearchView">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/museums_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:background="?attr/colorButtonNormal"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_account_balance_black_24dp"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="30dp"
+                android:text="@string/main_museums" />
+
+            <TextView
+                android:id="@+id/parks_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="?attr/colorButtonNormal"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_local_florist_black_24dp"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="30dp"
+                android:text="@string/main_parks" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/places_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:background="?attr/colorButtonNormal"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_place_black_24dp"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="30dp"
+                android:text="@string/main_places" />
+
+            <TextView
+                android:id="@+id/malls_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorButtonNormal"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_local_mall_black_24dp"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="30dp"
+                android:text="@string/main_malls" />
+        </TableRow>
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>
