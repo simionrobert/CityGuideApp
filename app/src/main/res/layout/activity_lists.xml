@@ -7,6 +7,20 @@
     android:background="?attr/colorButtonNormal"
     tools:context="com.example.cityguideapp.views.UserListActivity">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginRight="24dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
@@ -18,6 +32,7 @@
         app:menu="@menu/navigation" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="344dp"
         android:layout_height="392dp"
         android:orientation="vertical"
@@ -35,6 +50,7 @@
             android:horizontalSpacing="10dp"
             android:numColumns="2"
             android:verticalSpacing="50dp" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

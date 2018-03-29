@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.cityguideapp.R;
+import com.example.cityguideapp.models.GooglePlace;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
@@ -27,25 +28,46 @@ public class DescriptionActivity extends BaseLocationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         Bundle b = getIntent().getExtras();
         if(b!=null){
             String parent = b.getString("Parent");
 
-            if (parent.compareTo("Main") == 0 || parent.compareTo("Search") == 0) {
-                mRequestingLocationUpdates = true; //start service
+            if(parent!=null){
+                if (parent.compareTo("Main") == 0 || parent.compareTo("Search") == 0) {
+                    mRequestingLocationUpdates = true; //start service
+                    return;
+                }
             }
-        } else {
+        }
+
+        setContentView(R.layout.activity_description);
+
+        //TODO: Fetch place Descriptions FROM GoogleAPI
+        String placeID = b.getString("PlaceID");
+        //renderPlaceDescription(null,googlePlace);
+    }
+
+    private void renderPlaceDescription(Place place, GooglePlace googlePlace){
+        // TODO: Display place or GooglePlace pretty
+
+        if(place!=null){
             setContentView(R.layout.activity_description);
+
+        } else if(googlePlace !=null){
+
         }
     }
 
-
     @Override
-    protected void createLocationCallback() {
+    protected void onLocationCallback() {
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
+
+                stopLocationUpdates();
+                mRequestingLocationUpdates = false; //stop service
 
                 mCurrentLocation = locationResult.getLastLocation();
                 Log.i(TAG, "//////////////////////////////////////////////////////////////////////////////////////");
@@ -85,8 +107,7 @@ public class DescriptionActivity extends BaseLocationActivity {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Log.i(TAG, "Place: " + place.getName());
 
-                mRequestingLocationUpdates = false; //stop service
-                // TODO: Display place pretty
+                renderPlaceDescription(place,null);
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
 

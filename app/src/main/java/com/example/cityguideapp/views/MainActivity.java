@@ -25,14 +25,14 @@ public class MainActivity extends BaseNavigationActivity implements View.OnClick
                 bundle.putString("Parent", "Main");
 
                 Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
-               intent.putExtras(bundle);
-
+                intent.putExtras(bundle);
                 startActivity(intent);
                 return;
             case R.id.parks_text_view:
                 bundle.putString("URL", "parks");
                 break;
             case R.id.malls_text_view:
+
                 bundle.putString("URL", "malls");
                 break;
             case R.id.places_text_view:

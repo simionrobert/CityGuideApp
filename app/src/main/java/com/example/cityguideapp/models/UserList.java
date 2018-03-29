@@ -9,12 +9,23 @@ import java.util.ArrayList;
  */
 
 public class UserList {
+    private int id;
+    private String UID;
     private String name;
     private ArrayList<GooglePlace> places;
 
-    public UserList(String name, ArrayList<GooglePlace> places) {
+    public UserList(int id,String UID,String name) {
+        this.id=id;
+        this.UID = UID;
         this.name = name;
-        this.places = places;
+    }
+
+    public UserList(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -22,17 +33,31 @@ public class UserList {
     }
 
     public int getNrElements() {
-        return 2;
-        //return  places.size();
+        if(places==null)
+            return 0;
+
+        return places.size();
     }
 
     public ArrayList<GooglePlace> getPlaces() {
         return places;
     }
 
+    public void setPlaces(ArrayList<GooglePlace> places) {
+        this.places = places;
+    }
+
     public Bitmap getImage(){
 
         //get image from cache
         return null;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 }

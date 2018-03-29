@@ -61,7 +61,7 @@ public class BaseLocationActivity extends AppCompatActivity {
         // Kick off the process of building the LocationCallback, LocationRequest, and
         // LocationSettingsRequest objects.
         createLocationRequest();
-        createLocationCallback();
+        onLocationCallback();
         buildLocationSettingsRequest();
     }
 
@@ -72,7 +72,7 @@ public class BaseLocationActivity extends AppCompatActivity {
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-    protected void createLocationCallback() {
+    protected void onLocationCallback() {
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {

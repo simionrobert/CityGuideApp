@@ -1,4 +1,4 @@
-package com.example.cityguideapp.services;
+package com.example.cityguideapp.services.googleAPI;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -39,8 +39,8 @@ public class ImageDownloader extends AsyncTask<Photo, Void, Bitmap> {
             String GOOGLE_KEY =  bundle.getString("com.google.android.geo.API_KEY");
 
             Photo p = arg0[0];
-            URL url = new URL("https://maps.googleapis.com/maps/api/place/photo?maxwidth="+100
-                    +"&maxheight="+100
+            URL url = new URL("https://maps.googleapis.com/maps/api/place/photo?maxwidth="+200
+                    +"&maxheight="+200
                     +"&photoreference="+ p.getReference()+"&key=" + GOOGLE_KEY);
 
 

@@ -4,29 +4,35 @@ package com.example.cityguideapp.views;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.cityguideapp.R;
-import com.example.cityguideapp.services.GooglePlacesAPI;
+import com.example.cityguideapp.models.GooglePlace;
+import com.example.cityguideapp.services.googleAPI.GooglePlacesAPI;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 
-public class SearchActivity extends BaseLocationActivity{
+import java.util.ArrayList;
+
+public class SearchActivity extends BaseLocationActivity
+        implements GooglePlaceFragment.OnListFragmentInteractionListener,
+        GooglePlacesAPI.OnGoogleAPICallEnded {
 
     private static final String TAG = "SearchActivity";
 
-    private String placeType="";
+    private String placeType = "";
+    private GooglePlaceFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        // TODO: Use Google Places Web Service
         String url = getIntent().getExtras().getString("URL");
-        switch(url){
+        switch (url) {
             case "museums":
                 this.placeType = "museum";
                 break;
@@ -43,18 +49,26 @@ public class SearchActivity extends BaseLocationActivity{
 
         //start location service
         mRequestingLocationUpdates = true;
+
+        fragment = GooglePlaceFragment.newInstance(1,null);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_placeholder,fragment);
+        ft.commit();
     }
 
+
     @Override
-    protected void createLocationCallback() {
+    protected void onLocationCallback() {
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
 
                 mCurrentLocation = locationResult.getLastLocation();
+
+                stopLocationUpdates();
                 mRequestingLocationUpdates = false;
-                Log.i(TAG, "Location: " + mCurrentLocation.getLongitude() +" "+mCurrentLocation.getLatitude());
+                Log.i(TAG, "Location: " + mCurrentLocation.getLongitude() + " " + mCurrentLocation.getLatitude());
 
                 invokeGooglePlacesAPIService();
             }
@@ -62,29 +76,42 @@ public class SearchActivity extends BaseLocationActivity{
     }
 
     private void invokeGooglePlacesAPIService() {
-        ListView listView = findViewById(R.id.listView);
-        listView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-
-                    //Take care if button is present: IS FOCUSABLE. If it, this, able focus for it
-                    @Override
-                    public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                        Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
 
         Location location = new Location("SearchActivity");
         location.setLatitude(mCurrentLocation.getLatitude());
         location.setLongitude(mCurrentLocation.getLongitude());
 
         // Initialise api with all values
-        GooglePlacesAPI api = new GooglePlacesAPI(this, R.layout.search_item_template, listView, location, this.placeType);
+        GooglePlacesAPI api = new GooglePlacesAPI(this,this, location, this.placeType);
         api.execute();
     }
 
-    public void onClickSearchView(View v){
+    @Override
+    public void onGoogleAPICallEnded(ArrayList<GooglePlace> listItems) {
+
+        if (listItems.size() == 0) {
+            // Sth went wrong
+            Toast toast = Toast.makeText(this, R.string.internet_down, Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+
+            fragment.populateView(listItems);
+        }
+    }
+
+
+    @Override
+    public void onListFragmentInteraction(GooglePlace item) {
+        Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
+
+        Bundle b =new Bundle();
+        b.putString("placeID",item.getPlaceid());
+        intent.putExtras(b);
+
+        startActivity(intent);
+    }
+
+    public void onClickSearchView(View v) {
         Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
 
         Bundle bundle = new Bundle();
@@ -93,5 +120,4 @@ public class SearchActivity extends BaseLocationActivity{
 
         startActivity(intent);
     }
-
 }

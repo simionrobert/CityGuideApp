@@ -18,7 +18,40 @@ import java.util.ArrayList;
 
 public class GooglePlaceConverter {
 
-    public ArrayList<GooglePlace> convert(String JSON) {
+    public static ArrayList<GooglePlace> convert(String JSON) {
+    /*    ArrayList<GooglePlace> listPlaces = new ArrayList<>();
+
+        GooglePlace placex = new GooglePlace( "Nume1",  "1",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+        GooglePlace place2 = new GooglePlace( "Nume2",  "2",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+        GooglePlace place3 = new GooglePlace( "Nume3",  "3",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+        GooglePlace place4 = new GooglePlace( "Nume3",  "3",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+        GooglePlace place5 = new GooglePlace( "Nume3",  "3",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+        GooglePlace place6 = new GooglePlace( "Nume3",  "3",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+        GooglePlace place7 = new GooglePlace( "Nume3",  "3",  "32",  "ur",  "2",
+                "2", "true", null, 23.42,  32.21, null);
+
+        listPlaces.add(placex);
+        listPlaces.add(place2);
+        listPlaces.add(place3);
+        listPlaces.add(place4);
+        listPlaces.add(place5);
+        listPlaces.add(place6);
+        listPlaces.add(place7);
+
+        return listPlaces;*/
+
+
+
+        return parseResponse(JSON);
+    }
+
+    private static ArrayList<GooglePlace> parseResponse(String JSON){
         ArrayList<GooglePlace> listPlaces = new ArrayList<>();
 
         if (JSON != null) {
@@ -28,9 +61,7 @@ public class GooglePlaceConverter {
 
                 String name = null;
                 String rating= null;
-                String iconURL= null;
-                String id= null;
-                String placeid= null;
+                String placeID= null;
                 Double latitude = 0.0;
                 Double longitude = 0.0;
                 String vicinity= null;
@@ -42,15 +73,10 @@ public class GooglePlaceConverter {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jo = jsonArray.getJSONObject(i);
 
-                    if(jo.has("icon")){
-                        iconURL = jo.getString("icon");
-                    }
                     if(jo.has("rating"))
                         rating = jo.getString("rating");
-                    if(jo.has("id"))
-                        id = jo.getString("id");
                     if(jo.has("place_id"))
-                        placeid = jo.getString("place_id");
+                        placeID = jo.getString("place_id");
                     if(jo.has("name"))
                         name = jo.getString("name");
                     if(jo.has("vicinity"))
@@ -96,16 +122,15 @@ public class GooglePlaceConverter {
                         }
                     }
 
-                    GooglePlace place = new GooglePlace( name,  id,  placeid,  iconURL,  rating,
-                             vicinity, open_now, typesList, latitude,  longitude, photoArrayList);
+                    GooglePlace place = new GooglePlace( name,  placeID,  rating,
+                            vicinity, open_now, typesList, latitude,  longitude, photoArrayList);
                     listPlaces.add(place);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return listPlaces;
         }
 
-        return null;
+        return listPlaces;
     }
 }
