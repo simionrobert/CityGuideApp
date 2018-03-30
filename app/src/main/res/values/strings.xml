@@ -1,10 +1,13 @@
 <resources>
-    <string name="app_name">CityGuideApp</string>
+    <string name="app_name">City Guide App</string>
 
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Home</string>
     <string name="title_search">Search</string>
     <string name="title_lists">Lists</string>
     <string name="title_account">Account</string>
+    <string name="title_activity_description">Description</string>
+    <string name="title_activity_places">Places</string>
+
     <string name="main_museums">Museums</string>
     <string name="main_parks">Parks</string>
     <string name="main_places">Places</string>
@@ -49,6 +52,9 @@
     <string name="description_website">Website:</string>
     <string name="description_reviews">Reviews:</string>
     <string name="description_Phone">Phone number:</string>
+    <string name="description_maps_url">Maps:</string>
+    <string name="description_hours">Hours:</string>
+
 
 
     <!-- User List-->

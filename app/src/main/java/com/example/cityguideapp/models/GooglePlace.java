@@ -10,16 +10,28 @@ import java.util.ArrayList;
  */
 
 public class GooglePlace {
-    private int id;
 
+    // For database values
+    private int id;
     private String name;
     private String placeID;
+
+    // For GooglePlaceSearchAPI
     private String rating;
-    private  String vicinity;
+    private String vicinity;
     private String open_now;
     private Double latitude, longitude;
     private ArrayList<Photo> photoArrayList;
     private ArrayList<String> typesList;
+
+
+    // For GooglePlaceDetailsAPI
+    private String formatted_address = null;
+    private String international_phone_number = null;
+    private ArrayList<String> openingTime = null;
+    private String website = null;
+    private String mapsURL = null;
+    private ArrayList<Review> reviews = null;
 
     public GooglePlace(int id, String name, String placeID) {
         this.id = id;
@@ -38,6 +50,24 @@ public class GooglePlace {
         this.longitude = longitude;
         this.photoArrayList = photoArrayList;
         this.typesList = typesList;
+    }
+
+    public GooglePlace(String name, String placeID, String rating, Double latitude, Double longitude,
+                       ArrayList<Photo> photoArrayList, ArrayList<String> typesList, String formatted_address,
+                       String international_phone_number, ArrayList<String> openingTime, String website, String mapsURL, ArrayList<Review> reviews) {
+        this.name = name;
+        this.placeID = placeID;
+        this.rating = rating;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.photoArrayList = photoArrayList;
+        this.typesList = typesList;
+        this.formatted_address = formatted_address;
+        this.international_phone_number = international_phone_number;
+        this.openingTime = openingTime;
+        this.website = website;
+        this.mapsURL = mapsURL;
+        this.reviews = reviews;
     }
 
     public int getId() {
@@ -77,6 +107,41 @@ public class GooglePlace {
         return typesList;
     }
 
+    public String getPlaceID() {
+        return placeID;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public String getFormatted_address() {
+        return formatted_address;
+    }
+
+    public String getInternational_phone_number() {
+        return international_phone_number;
+    }
+
+    public ArrayList<String> getOpeningTime() {
+        return openingTime;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public String getMapsURL() {
+        return mapsURL;
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
 }
 
 

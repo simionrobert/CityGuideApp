@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class UserListAdapter extends ArrayAdapter<UserList> {
 
-    private int layout;
     ArrayList<UserList> items;
+    private int layout;
 
     public UserListAdapter(Context context, int resource, ArrayList<UserList> items) {
         super(context, resource, items);
@@ -51,6 +51,7 @@ public class UserListAdapter extends ArrayAdapter<UserList> {
             nr.setText(Integer.toString(list.getNrElements()) + " Places");
 
             if (list.getImage() != null)
+                //TODO: set user list image
                 picture.setImageBitmap(list.getImage());
         }
 

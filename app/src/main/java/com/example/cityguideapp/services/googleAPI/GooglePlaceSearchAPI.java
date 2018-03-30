@@ -17,10 +17,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GooglePlacesAPI extends AsyncTask{
+public class GooglePlaceSearchAPI extends AsyncTask{
 
     private static String TAG = "Google Places API ";
-    OnGoogleAPICallEnded callback;
+    private OnGoogleAPICallEnded callback;
     private String GOOGLE_KEY="";
     private String response;
     private  Context context;
@@ -28,7 +28,7 @@ public class GooglePlacesAPI extends AsyncTask{
     private String type;
 
 
-    public GooglePlacesAPI(OnGoogleAPICallEnded callback, Context context,  Location location, String type) {
+    public GooglePlaceSearchAPI(OnGoogleAPICallEnded callback, Context context, Location location, String type) {
         this.callback = callback;
         this.context = context;
         this.location = location;
@@ -92,5 +92,4 @@ public class GooglePlacesAPI extends AsyncTask{
     public interface OnGoogleAPICallEnded {
         void onGoogleAPICallEnded(ArrayList<GooglePlace> listItems);
     }
-
 }

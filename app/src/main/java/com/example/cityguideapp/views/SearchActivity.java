@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.cityguideapp.R;
 import com.example.cityguideapp.models.GooglePlace;
-import com.example.cityguideapp.services.googleAPI.GooglePlacesAPI;
+import com.example.cityguideapp.services.googleAPI.GooglePlaceSearchAPI;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class SearchActivity extends BaseLocationActivity
         implements GooglePlaceFragment.OnListFragmentInteractionListener,
-        GooglePlacesAPI.OnGoogleAPICallEnded {
+        GooglePlaceSearchAPI.OnGoogleAPICallEnded {
 
     private static final String TAG = "SearchActivity";
 
@@ -82,7 +82,7 @@ public class SearchActivity extends BaseLocationActivity
         location.setLongitude(mCurrentLocation.getLongitude());
 
         // Initialise api with all values
-        GooglePlacesAPI api = new GooglePlacesAPI(this,this, location, this.placeType);
+        GooglePlaceSearchAPI api = new GooglePlaceSearchAPI(this,this, location, this.placeType);
         api.execute();
     }
 

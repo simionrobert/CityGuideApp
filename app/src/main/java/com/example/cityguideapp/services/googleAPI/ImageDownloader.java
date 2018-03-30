@@ -8,8 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.example.cityguideapp.models.Photo;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,11 +15,16 @@ import java.net.URL;
 /**
  * Created by Baal on 3/26/2018.
  */
-public class ImageDownloader extends AsyncTask<Photo, Void, Bitmap> {
+public class ImageDownloader extends AsyncTask<Object, Void, Bitmap> {
 
     Context context;
-    public ImageDownloader(Context context) {
+    private int weight;
+    private int height;
+
+    public ImageDownloader(Context context,int weight,int height) {
         this.context = context;
+        this.weight=weight;
+        this.height = height;
     }
 
     @Override
@@ -31,21 +34,30 @@ public class ImageDownloader extends AsyncTask<Photo, Void, Bitmap> {
     }
 
     @Override
-    protected Bitmap doInBackground(Photo... arg0)
+    protected Bitmap doInBackground(Object... arg0)
     {
         try{
-            ApplicationInfo app = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            Bundle bundle = app.metaData;
-            String GOOGLE_KEY =  bundle.getString("com.google.android.geo.API_KEY");
+            String reference = (String) arg0[0];
+            if(!reference.contains("http")){
+                ApplicationInfo app = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+                Bundle bundle = app.metaData;
+                String GOOGLE_KEY =  bundle.getString("com.google.android.geo.API_KEY");
 
-            Photo p = arg0[0];
-            URL url = new URL("https://maps.googleapis.com/maps/api/place/photo?maxwidth="+200
-                    +"&maxheight="+200
-                    +"&photoreference="+ p.getReference()+"&key=" + GOOGLE_KEY);
+                URL url = new URL("https://maps.googleapis.com/maps/api/place/photo?maxwidth="+weight
+                        +"&maxheight="+height
+                        +"&photoreference="+ reference +"&key=" + GOOGLE_KEY);
 
+                Bitmap bitmapIcon = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                return bitmapIcon;
+            } else {
 
-            Bitmap bitmapIcon = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            return bitmapIcon;
+                //reference is an url
+                URL url = new URL(reference);
+
+                Bitmap bitmapIcon = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                return bitmapIcon;
+            }
+
         } catch (MalformedURLException e){
             e.printStackTrace();
         }catch (IOException e){

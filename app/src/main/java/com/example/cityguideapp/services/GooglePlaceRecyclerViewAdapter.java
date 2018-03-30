@@ -48,17 +48,17 @@ public class GooglePlaceRecyclerViewAdapter extends RecyclerView.Adapter<GoogleP
             holder.picture.setImageBitmap(p.getImage());
         } else{
             //get image url and cache
-            ImageDownloader downloader = new ImageDownloader(holder.title.getContext()) {
+            ImageDownloader downloader = new ImageDownloader(holder.title.getContext(),200,200) {
                 @Override
                 protected void onPostExecute(Bitmap result) {
                     super.onPostExecute(result);
 
-                    if(holder.getAdapterPosition() < mValues.size())
+                    if(holder.getAdapterPosition() < mValues.size() && holder.getAdapterPosition()>=0 )
                         mValues.get(holder.getAdapterPosition()).getPhotoArrayList().get(0).setImage(result);
                     holder.picture.setImageBitmap(result);
                 }
             };
-            downloader.execute(holder.mItem.getPhotoArrayList().get(0));
+            downloader.execute(holder.mItem.getPhotoArrayList().get(0).getReference());
         }
 
 

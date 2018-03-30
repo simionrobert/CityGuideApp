@@ -77,6 +77,8 @@ public class GooglePlaceFragment extends Fragment {
             // For ListActivity
             if(this.listItems!=null){
                 recyclerView.setAdapter(new GooglePlaceRecyclerViewAdapter(listItems, mListener));
+            } else {
+                this.listItems = new ArrayList<>();
             }
         }
         return view;
@@ -85,6 +87,12 @@ public class GooglePlaceFragment extends Fragment {
     // For SearchActivity
     public void populateView(ArrayList<GooglePlace> listItems){
         this.listItems = listItems;
+        recyclerView.setAdapter(new GooglePlaceRecyclerViewAdapter(listItems, mListener));
+    }
+
+    // For PlacesActivity
+    public void addItemsToView(GooglePlace item){
+        this.listItems.add(item);
         recyclerView.setAdapter(new GooglePlaceRecyclerViewAdapter(listItems, mListener));
     }
 

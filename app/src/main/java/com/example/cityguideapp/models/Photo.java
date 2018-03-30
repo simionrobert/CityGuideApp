@@ -3,10 +3,11 @@ package com.example.cityguideapp.models;
 import android.graphics.Bitmap;
 
 /**
- * Created by Baal on 3/21/2018.
+ * Created by Baal on 3/30/2018.
  */
 
-public class Photo{
+public class Photo {
+
     private String height;
     private String width;
     private String reference;
@@ -24,16 +25,32 @@ public class Photo{
         return height;
     }
 
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
     public String getWidth() {
         return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
     }
 
     public String getReference() {
         return reference;
     }
 
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
     public String getHtml_attributions() {
         return html_attributions;
+    }
+
+    public void setHtml_attributions(String html_attributions) {
+        this.html_attributions = html_attributions;
     }
 
     public Bitmap getImage() {
